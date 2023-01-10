@@ -1,0 +1,15 @@
+{
+  "name": "demo",
+  "version": "1.0.0",
+  "description": "API regression test automation suite",
+  "main": "index.js",
+  "scripts": {
+    "execute": "newman run regressionTestSuite.json -r htmlextra"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "newman": "^5.3.2",
+    "newman-reporter-htmlextra": "^1.22.11"
+  }
+}

@@ -1,0 +1,106 @@
+{
+	"info": {
+		"_postman_id": "6124a31b-886f-410c-8dee-33f43046bed3",
+		"name": "regressionTestSuite",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "21172497"
+	},
+	"item": [
+		{
+			"name": "getUsers",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test('Response code verification', ()=>{\r",
+							"    pm.response.to.have.status(200);\r",
+							"    pm.response.to.have.status('OK');\r",
+							"});\r",
+							"\r",
+							"pm.test('Response time verification',()=>{\r",
+							"    pm.expect(pm.response.responseTime).to.be.lessThan(500);\r",
+							"});\r",
+							"\r",
+							"const schema = {\r",
+							"    \"type\":\"object\",\r",
+							"    \"properties\":{\r",
+							"        \"page\":{\"type\":\"number\"},\r",
+							"        \"per_page\":{\"type\":\"number\"},\r",
+							"        \"total\":{\"type\":\"number\"},\r",
+							"        \"total_pages\":{\"type\":\"number\"},\r",
+							"        \"data\":{\r",
+							"            \"type\":\"array\",\r",
+							"            \"items\":{\r",
+							"                \"id\":{\"type\":\"number\"},\r",
+							"                \"email\":{\"type\":\"string\"},\r",
+							"                \"first_name\":{\"type\":\"string\"},\r",
+							"                \"last_name\":{\"type\":\"string\"},\r",
+							"                \"avatar\":{\"type\":\"string\"}\r",
+							"            },\r",
+							"            \"required\":[\"id\",\"email\",\"first_name\",\"last_name\",\"avatar\"]\r",
+							"        },\r",
+							"        \"support\":{\r",
+							"            \"type\":\"object\",\r",
+							"            \"properties\":{\r",
+							"                \"url\":{\"type\":\"string\"},\r",
+							"                \"text\":{\"type\":\"string\"}\r",
+							"            },\r",
+							"            \"required\":[\"url\",\"text\"]\r",
+							"        }\r",
+							"    },\r",
+							"    \"required\":[\"page\", \"per_page\",\"total\",\"total_pages\",\"data\",\"support\"]\r",
+							"}\r",
+							"\r",
+							"pm.test('Contract verification',()=>{\r",
+							"    pm.response.to.have.jsonSchema(schema);\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/users",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"users"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "https://reqres.in/api",
+			"type": "string"
+		}
+	]
+}
